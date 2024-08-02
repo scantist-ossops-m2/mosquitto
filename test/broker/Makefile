@@ -39,6 +39,7 @@ endif
 
 
 02 :
+	./02-subscribe-long-topic.py
 	./02-subscribe-qos0.py
 	./02-subscribe-qos1.py
 	./02-subscribe-qos2.py
@@ -67,6 +68,7 @@ endif
 	./03-pattern-matching.py
 	#./03-publish-qos1-queued-bytes.py
 	./03-publish-invalid-utf8.py
+	./03-publish-long-topic.py
 	./03-publish-dollar.py
 
 04 :
