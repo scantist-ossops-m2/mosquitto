@@ -395,9 +395,13 @@ def gen_pubrel(mid, dup=False):
 def gen_pubcomp(mid):
     return struct.pack('!BBH', 112, 2, mid)
 
+
 def gen_subscribe(mid, topic, qos):
-    pack_format = "!BBHH"+str(len(topic))+"sB"
-    return struct.pack(pack_format, 130, 2+2+len(topic)+1, mid, len(topic), topic, qos)
+    packet = struct.pack("!B", 130)
+    packet += bytes(pack_remaining_length(2+2+len(topic)+1))
+    pack_format = "!HH"+str(len(topic))+"sB"
+    return packet + struct.pack(pack_format, mid, len(topic), topic, qos)
+
 
 def gen_suback(mid, qos):
     return struct.pack('!BBHB', 144, 2+1, mid, qos)
@@ -419,7 +423,7 @@ def gen_disconnect():
     return struct.pack('!BB', 224, 0)
 
 def pack_remaining_length(remaining_length):
-    s = ""
+    s = bytes("".encode('utf-8'))
     while True:
         byte = remaining_length % 128
         remaining_length = remaining_length // 128
