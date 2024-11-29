@@ -7,11 +7,6 @@ Security:
   This is now fixed. All other security measures operate as expected, and in
   particular non-websockets listeners are not affected by this. Closes #996.
 
-Security:
-- If `per_listener_settings` is set to true, then the `acl_file` setting was
-  ignored for the "default listener" only. This has been fixed. This does not
-  affect any listeners defined with the `listener` option. Closes #1073.
-
 Broker:
 - Process all pending messages even when a client has disconnected. This means
   a client that send a PUBLISH then DISCONNECT quickly, then disconnects will
