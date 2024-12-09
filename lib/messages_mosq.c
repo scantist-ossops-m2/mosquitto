@@ -178,7 +178,7 @@ void _mosquitto_messages_reconnect_reset(struct mosquitto *mosq)
 			* whatever the client has got. */
 		}
 		prev = message;
-		message = message->next;
+		if(message) message = message->next;
 	}
 	mosq->in_messages_last = prev;
 	pthread_mutex_unlock(&mosq->in_message_mutex);
